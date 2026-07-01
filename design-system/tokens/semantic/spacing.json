@@ -1,0 +1,22 @@
+{
+  "spacing": {
+    "$type": "dimension",
+    "$description": "Semantic spacing — reference these, not primitives.",
+    "xs":  { "$value": "{space.1}" },
+    "sm":  { "$value": "{space.2}" },
+    "md":  { "$value": "{space.4}", "$description": "Default content padding / edge margin." },
+    "lg":  { "$value": "{space.6}" },
+    "xl":  { "$value": "{space.8}" },
+    "2xl": { "$value": "{space.12}" },
+    "edge-margin": { "$value": "{space.4}", "$description": "Screen edge inset." },
+    "target-gap":  { "$value": "{space.2}", "$description": "Min gap between touch targets." }
+  },
+  "radius": {
+    "$type": "dimension",
+    "$description": "Semantic radii.",
+    "control": { "$value": "{radius.md}" },
+    "card":    { "$value": "{radius.lg}" },
+    "sheet":   { "$value": "{radius.xl}" },
+    "pill":    { "$value": "{radius.full}" }
+  }
+}

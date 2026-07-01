@@ -1,0 +1,28 @@
+{
+  "color": {
+    "$type": "color",
+    "$description": "Dark-theme semantic roles. Not pure black; uses elevation overlays.",
+    "surface":        { "$value": "{color.neutral.950}" },
+    "surface-variant":{ "$value": "{color.neutral.900}" },
+    "surface-raised": { "$value": "{color.neutral.800}", "$description": "Elevation overlay, lighter than base." },
+    "on-surface":     { "$value": "{color.neutral.100}", "$description": "Body text on dark surface (>= 4.5:1)." },
+    "on-surface-muted":{ "$value": "{color.neutral.400}" },
+    "divider":        { "$value": "{color.neutral.800}", "$description": "Decorative separator (exempt from 1.4.11)." },
+    "border":         { "$value": "{color.neutral.500}", "$description": "Control outline — meets 1.4.11 >= 3:1." },
+    "action": {
+      "primary":    { "$value": "{color.blue.400}", "$description": "Lighter tone for dark bg contrast." },
+      "on-primary": { "$value": "{color.neutral.950}" },
+      "primary-hover": { "$value": "{color.blue.300}" }
+    },
+    "text": {
+      "error":   { "$value": "{color.red.400}" },
+      "success": { "$value": "{color.green.400}" },
+      "warning": { "$value": "{color.amber.400}" }
+    },
+    "status": {
+      "error-bg":   { "$value": "{color.red.600}" },
+      "success-bg": { "$value": "{color.green.600}" },
+      "warning-bg": { "$value": "{color.amber.500}" }
+    }
+  }
+}

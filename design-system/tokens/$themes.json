@@ -1,0 +1,22 @@
+[
+  {
+    "id": "light",
+    "name": "Light",
+    "selectedTokenSets": {
+      "primitives/color": "source",
+      "primitives/dimension": "source",
+      "semantic/spacing": "enabled",
+      "themes/light": "enabled"
+    }
+  },
+  {
+    "id": "dark",
+    "name": "Dark",
+    "selectedTokenSets": {
+      "primitives/color": "source",
+      "primitives/dimension": "source",
+      "semantic/spacing": "enabled",
+      "themes/dark": "enabled"
+    }
+  }
+]

@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install test deps
+        run: pip install pytest
+
+      - name: SKILL.md size gate (router must stay lean, <= 500 lines)
+        run: |
+          lines=$(wc -l < SKILL.md)
+          echo "SKILL.md is $lines lines"
+          test "$lines" -le 500
+
+      - name: Rule registry is in sync (no duplicate IDs)
+        run: python3 scripts/build_registry.py --check
+
+      - name: Validator unit tests
+        run: python3 -m pytest quality-checks/validators/tests -q
+
+      - name: Golden fixtures — good scores 100, bad is blocked
+        run: |
+          python3 quality-checks/validators/run_all.py \
+            quality-checks/validators/tests/fixtures/good_screen.dart | tee /tmp/good.txt
+          grep -q "Readiness score: 100/100" /tmp/good.txt
+          # bad fixture must exit non-zero (errors present)
+          if python3 quality-checks/validators/run_all.py \
+              quality-checks/validators/tests/fixtures/bad_screen.dart > /dev/null; then
+            echo "bad fixture unexpectedly passed"; exit 1
+          fi
+
+      - name: Token JSON is valid
+        run: |
+          python3 - <<'PY'
+          import json, glob, sys
+          bad = 0
+          for f in glob.glob("design-system/tokens/**/*.json", recursive=True):
+              try: json.load(open(f))
+              except Exception as e: print(f"{f}: {e}"); bad += 1
+          sys.exit(1 if bad else 0)
+          PY

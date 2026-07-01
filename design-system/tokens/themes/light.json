@@ -1,0 +1,28 @@
+{
+  "color": {
+    "$type": "color",
+    "$description": "Light-theme semantic color roles. AA-verified pairings.",
+    "surface":        { "$value": "{color.neutral.0}" },
+    "surface-variant":{ "$value": "{color.neutral.100}" },
+    "surface-raised": { "$value": "{color.neutral.50}" },
+    "on-surface":     { "$value": "{color.neutral.900}", "$description": "Body text on surface (>= 4.5:1)." },
+    "on-surface-muted":{ "$value": "{color.neutral.600}" },
+    "divider":        { "$value": "{color.neutral.200}", "$description": "Decorative separator (exempt from 1.4.11)." },
+    "border":         { "$value": "{color.neutral.500}", "$description": "Control outline — meets 1.4.11 >= 3:1." },
+    "action": {
+      "primary":    { "$value": "{color.blue.500}" },
+      "on-primary": { "$value": "{color.white}" },
+      "primary-hover": { "$value": "{color.blue.600}" }
+    },
+    "text": {
+      "error":   { "$value": "{color.red.600}" },
+      "success": { "$value": "{color.green.600}" },
+      "warning": { "$value": "{color.amber.500}" }
+    },
+    "status": {
+      "error-bg":   { "$value": "{color.red.100}" },
+      "success-bg": { "$value": "{color.green.100}" },
+      "warning-bg": { "$value": "{color.amber.100}" }
+    }
+  }
+}

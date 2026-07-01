@@ -1,0 +1,25 @@
+{
+  "$schema": "https://tr.designtokens.org/format/",
+  "$description": "DTCG-2025.10 token file template. Use $value/$type; alias with {group.token}.",
+  "color": {
+    "$type": "color",
+    "example-primitive": { "$value": "#2563EB", "$description": "Primitive: named by value." },
+    "example-semantic": { "$value": "{color.example-primitive}", "$description": "Semantic: named by intent." }
+  },
+  "dimension": {
+    "$type": "dimension",
+    "space-md": { "$value": { "value": 16, "unit": "px" }, "$description": "On the 4/8pt grid." }
+  },
+  "shadow": {
+    "$type": "shadow",
+    "card": {
+      "$value": {
+        "color": "{color.shadow}",
+        "offsetX": { "value": 0, "unit": "px" },
+        "offsetY": { "value": 2, "unit": "px" },
+        "blur": { "value": 8, "unit": "px" },
+        "spread": { "value": 0, "unit": "px" }
+      }
+    }
+  }
+}

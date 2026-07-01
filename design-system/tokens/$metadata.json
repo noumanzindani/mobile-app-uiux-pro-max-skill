@@ -1,0 +1,11 @@
+{
+  "tokenSetOrder": [
+    "primitives/color",
+    "primitives/dimension",
+    "semantic/spacing",
+    "themes/light",
+    "themes/dark"
+  ],
+  "activeThemes": ["light"],
+  "$dtcgVersion": "2025.10"
+}
