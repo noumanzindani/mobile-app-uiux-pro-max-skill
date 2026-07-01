@@ -1,0 +1,15 @@
+{
+  "id": "settings",
+  "title": "Settings with grouped/searchable list + isolated destructive zone",
+  "prompt": "Design a settings screen in {framework}.",
+  "industry": "productivity",
+  "required_states": ["ideal", "empty", "loading", "error", "offline", "success", "permission-denied"],
+  "must_pass": ["token_lint", "contrast_check", "target_size_lint", "state_coverage", "dynamic_type_check", "rtl_check"],
+  "with_skill": {
+    "flutter": "examples/settings/flutter",
+    "react-native": "examples/settings/react-native",
+    "swiftui": "examples/settings/swiftui",
+    "jetpack-compose": "examples/settings/jetpack-compose"
+  },
+  "baseline": {}
+}

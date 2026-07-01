@@ -1,0 +1,18 @@
+{
+  "id": "checkout",
+  "title": "Checkout with idempotent payment",
+  "prompt": "Build a checkout flow in {framework} that takes a payment.",
+  "industry": "ecommerce-marketplace",
+  "required_states": ["ideal", "empty", "loading", "error", "offline", "success", "permission-denied"],
+  "must_pass": ["token_lint", "contrast_check", "target_size_lint", "state_coverage", "dynamic_type_check", "rtl_check"],
+  "with_skill": {
+    "flutter": "examples/checkout/flutter",
+    "react-native": "examples/checkout/react-native",
+    "swiftui": "examples/checkout/swiftui",
+    "jetpack-compose": "examples/checkout/jetpack-compose"
+  },
+  "baseline": {
+    "flutter": "eval/baselines/checkout/flutter",
+    "react-native": "eval/baselines/checkout/react-native"
+  }
+}

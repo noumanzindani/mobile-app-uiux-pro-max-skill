@@ -54,9 +54,11 @@ def iter_source_files(paths, exts=SOURCE_EXTS):
 
 
 # Directories excluded from *recursive* scans (explicit file args are always read,
-# so test fixtures can still be validated directly by the test suite).
+# so test fixtures and eval baselines can still be validated directly).
+# `eval/baselines/` holds intentionally-bad "no-skill" reference code used by the
+# eval harness; it must never pollute a repo-wide `run_all.py .` scan.
 EXCLUDE_DIRS = ("build/output", "/fixtures/", "validators/tests", "/.git/",
-                "/node_modules/", "/.dart_tool/")
+                "/node_modules/", "/.dart_tool/", "eval/baselines/")
 
 
 def _as_list(x):

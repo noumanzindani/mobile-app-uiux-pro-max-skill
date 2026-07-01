@@ -93,6 +93,9 @@ Individually: `contrast_check.py` (WCAG ratios) · `target_size_lint.py` (44pt/4
 Then reason through the prose checklists in `quality-checks/checklists/` for the
 non-mechanical items. See `quality-checks/_index.md` for the full pipeline + scoring.
 
+To measure the skill's quality lift vs. no-skill output, or to check the description
+still triggers, see `eval/_index.md` (`python3 eval/run_eval.py`, `eval/trigger_test.py`).
+
 ---
 
 ## ⛔ The 5 Laws (non-negotiable)

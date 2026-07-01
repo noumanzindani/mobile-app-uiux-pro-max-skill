@@ -6,6 +6,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **Eval harness (`eval/`) — the skill's quality claim is now a reproducible,
+  CI-gated number.** Two committed corpora (with-skill = the flagship `examples/`,
+  baseline = intentionally-naive "no-skill" code in `eval/baselines/`) are graded by
+  the exact validators that ship, with no model call or API key. `run_eval.py` reports
+  the readiness **lift** and gates CI on *every with-skill cell scoring 100 AND mean
+  lift ≥ 40 pts* (current: **+93.2 pts**, 100.0 vs 6.8 over 4 paired cells; uncovered
+  cells are logged, never hidden). `trigger_test.py` guards activation (Goal G2): the
+  `SKILL.md` description must carry every flagship trigger keyword and clear
+  recall/specificity ≥ 0.90 on a labeled prompt corpus. Declarative scenarios in
+  `eval/scenarios/*.json`; 12-test self-suite (incl. "the gate bites"); both wired into
+  `.github/workflows/ci.yml`.
+
+### Fixed
+- `run_eval.py` treats an unscoreable with-skill cell (no source) as 0 so the floor
+  fails cleanly instead of crashing on a `None`/`int` comparison (caught by the
+  harness's own gate-bites test).
+
 ## [0.3.0] - 2026-07-01
 
 ### Added

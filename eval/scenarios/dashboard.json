@@ -1,0 +1,15 @@
+{
+  "id": "dashboard",
+  "title": "Responsive dashboard with per-widget states",
+  "prompt": "Generate a dashboard screen in {framework} with several metric tiles.",
+  "industry": "productivity",
+  "required_states": ["ideal", "empty", "loading", "error", "offline", "success", "permission-denied"],
+  "must_pass": ["token_lint", "contrast_check", "target_size_lint", "state_coverage", "dynamic_type_check", "rtl_check"],
+  "with_skill": {
+    "flutter": "examples/dashboard/flutter",
+    "react-native": "examples/dashboard/react-native",
+    "swiftui": "examples/dashboard/swiftui",
+    "jetpack-compose": "examples/dashboard/jetpack-compose"
+  },
+  "baseline": {}
+}

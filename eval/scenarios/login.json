@@ -1,0 +1,18 @@
+{
+  "id": "login",
+  "title": "Accessible login / authentication screen",
+  "prompt": "Design a login screen in {framework} for a mobile app.",
+  "industry": "auth",
+  "required_states": ["ideal", "empty", "loading", "error", "offline", "success", "permission-denied"],
+  "must_pass": ["token_lint", "contrast_check", "target_size_lint", "state_coverage", "dynamic_type_check", "rtl_check"],
+  "with_skill": {
+    "flutter": "examples/login/flutter",
+    "react-native": "examples/login/react-native",
+    "swiftui": "examples/login/swiftui",
+    "jetpack-compose": "examples/login/jetpack-compose"
+  },
+  "baseline": {
+    "flutter": "eval/baselines/login/flutter",
+    "react-native": "eval/baselines/login/react-native"
+  }
+}

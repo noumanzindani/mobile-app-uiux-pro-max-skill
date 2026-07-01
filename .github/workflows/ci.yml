@@ -31,6 +31,15 @@ jobs:
       - name: Validator unit tests
         run: python3 -m pytest quality-checks/validators/tests -q
 
+      - name: Eval harness self-tests
+        run: python3 -m pytest eval/tests -q
+
+      - name: Eval — quality lift over baseline (gate: all 100 + mean lift >= 40)
+        run: python3 eval/run_eval.py
+
+      - name: Eval — SKILL.md trigger coverage (gate: recall/specificity + keywords)
+        run: python3 eval/trigger_test.py
+
       - name: Golden fixtures — good scores 100, bad is blocked
         run: |
           python3 quality-checks/validators/run_all.py \
