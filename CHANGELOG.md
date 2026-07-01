@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Login flagship — real code in all four v1 frameworks** (Flutter, React Native,
+  SwiftUI, Jetpack Compose): token-driven, all 7 states, WCAG 2.2, keyboard-safe,
+  RTL-safe, reduce-motion aware. Each scores **100/100** on `run_all.py`.
+- SwiftUI token layer made cross-SDK (UIKit/AppKit `canImport` shim) so it compiles
+  on both iOS and macOS toolchains.
+
+## [0.1.0] - 2026-07-01
+
+### Added
 - Initial project scaffold (Phase 1 — Foundation).
 - `SKILL.md` router with the 15-point Pre-Generation Protocol and decision routers.
 - Design-system spec + DTCG-2025.10 token files (primitives, semantic, themes) and Style Dictionary build config.
