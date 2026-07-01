@@ -44,6 +44,13 @@ def test_each_paired_baseline_loses_to_with_skill():
         assert r["lift"] > 0, f"{r['scenario']}/{r['framework']} baseline did not lose"
         assert r["baseline"] < 100
 
+def test_full_baseline_coverage():
+    # every with-skill cell must have a paired baseline — the lift rests on all cells,
+    # so a new scenario cannot silently ship without one.
+    s = run_eval.evaluate()["summary"]
+    assert s["coverage_gaps"] == [], f"cells missing a baseline: {s['coverage_gaps']}"
+    assert s["baseline_cells"] == s["with_skill_cells"]
+
 def test_a_known_baseline_scores_low():
     # the login/flutter baseline is intentionally bad; it must not sneak near 100
     score, findings = run_eval.score_cell("eval/baselines/login/flutter")

@@ -2,7 +2,7 @@
 // Typical AI-emitted checkout WITHOUT the Mobile UI/UX Pro Max skill: hardcoded
 // colors, off-grid spacing, physical left/right insets, a sub-legible price line,
 // a fixed-height text row that clips scaled text, and — most dangerous for
-// checkout — no processing / error / offline states, so nothing guards against a
+// checkout — none of the required UI states, so nothing guards against a
 // double-charge. Graded against examples/checkout/flutter/.
 //
 // DO NOT copy this file. It exists only to measure the skill's lift.

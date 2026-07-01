@@ -2,7 +2,7 @@
 // This is the kind of login screen an AI assistant typically emits WITHOUT the
 // Mobile UI/UX Pro Max skill: hardcoded colors, off-grid spacing, physical
 // left/right insets, a tiny icon-button hit area, sub-legible text, and only the
-// happy path (no loading / empty / error / offline states). run_eval.py grades it
+// happy path — none of the required UI states. run_eval.py grades it
 // against the token-driven, all-states version in examples/login/flutter/.
 //
 // DO NOT copy this file. It exists only to measure the skill's lift.

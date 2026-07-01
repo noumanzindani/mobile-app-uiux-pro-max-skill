@@ -11,5 +11,10 @@
     "swiftui": "examples/chat/swiftui",
     "jetpack-compose": "examples/chat/jetpack-compose"
   },
-  "baseline": {}
+  "baseline": {
+    "flutter": "eval/baselines/chat/flutter",
+    "react-native": "eval/baselines/chat/react-native",
+    "swiftui": "eval/baselines/chat/swiftui",
+    "jetpack-compose": "eval/baselines/chat/jetpack-compose"
+  }
 }

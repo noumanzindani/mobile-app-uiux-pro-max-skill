@@ -12,8 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   baseline = intentionally-naive "no-skill" code in `eval/baselines/`) are graded by
   the exact validators that ship, with no model call or API key. `run_eval.py` reports
   the readiness **lift** and gates CI on *every with-skill cell scoring 100 AND mean
-  lift ≥ 40 pts* (current: **+93.2 pts**, 100.0 vs 6.8 over 4 paired cells; uncovered
-  cells are logged, never hidden). `trigger_test.py` guards activation (Goal G2): the
+  lift ≥ 40 pts* (current: **+74.4 pts** across **all 20 cells** — 5 flagships × 4
+  frameworks — each with a committed naive baseline; `test_full_baseline_coverage` fails
+  if any cell is unpaired). `trigger_test.py` guards activation (Goal G2): the
   `SKILL.md` description must carry every flagship trigger keyword and clear
   recall/specificity ≥ 0.90 on a labeled prompt corpus. Declarative scenarios in
   `eval/scenarios/*.json`; 12-test self-suite (incl. "the gate bites"); both wired into

@@ -1,8 +1,8 @@
 // BASELINE — "no-skill" reference generation for the eval harness.
 // Typical AI-emitted React Native login WITHOUT the Mobile UI/UX Pro Max skill:
 // hardcoded hex colors, off-grid spacing, physical left/right padding, an
-// undersized touch target, sub-legible text, and only the happy path (no
-// loading / empty / error / offline states). Graded against the token-driven,
+// undersized touch target, sub-legible text, and only the happy path — none of
+// the required UI states. Graded against the token-driven,
 // all-states version in examples/login/react-native/.
 //
 // DO NOT copy this file. It exists only to measure the skill's lift.

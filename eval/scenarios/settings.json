@@ -11,5 +11,10 @@
     "swiftui": "examples/settings/swiftui",
     "jetpack-compose": "examples/settings/jetpack-compose"
   },
-  "baseline": {}
+  "baseline": {
+    "flutter": "eval/baselines/settings/flutter",
+    "react-native": "eval/baselines/settings/react-native",
+    "swiftui": "eval/baselines/settings/swiftui",
+    "jetpack-compose": "eval/baselines/settings/jetpack-compose"
+  }
 }

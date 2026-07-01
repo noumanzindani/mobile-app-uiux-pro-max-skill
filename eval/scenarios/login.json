@@ -13,6 +13,8 @@
   },
   "baseline": {
     "flutter": "eval/baselines/login/flutter",
-    "react-native": "eval/baselines/login/react-native"
+    "react-native": "eval/baselines/login/react-native",
+    "swiftui": "eval/baselines/login/swiftui",
+    "jetpack-compose": "eval/baselines/login/jetpack-compose"
   }
 }

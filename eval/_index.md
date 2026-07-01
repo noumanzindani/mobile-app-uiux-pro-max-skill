@@ -36,12 +36,19 @@ inflates the headline — only adding baselines moves it.
 ### Scenarios & coverage
 
 Scenarios are declarative JSON in `eval/scenarios/*.json` (prompt · framework · required
-states · must-pass validators · with-skill and baseline paths). Baselines currently
-cover **login** and **checkout** across Flutter + React Native (4 paired cells); the
-other 16 with-skill cells are graded but unpaired, and `run_eval.py` **logs every
-uncovered cell** rather than implying full coverage. To widen the measured delta, add a
-folder under `eval/baselines/<scenario>/<framework>/` and reference it from the scenario's
-`baseline` map.
+states · must-pass validators · with-skill and baseline paths). **All 20 cells** (5
+flagships × 4 frameworks) are paired — `test_full_baseline_coverage` fails CI if any
+with-skill cell lacks a baseline, so a new scenario cannot silently ship unmeasured.
+`run_eval.py` still logs any uncovered cell rather than implying coverage. To add a new
+scenario, drop naive code under `eval/baselines/<scenario>/<framework>/` and reference it
+from the scenario's `baseline` map.
+
+The baselines are graded by the regex validators, never compiled — the SwiftUI cells
+assume a `Color(hex:)` extension (as such code usually does) purely to carry a hardcoded
+hex the way real naive SwiftUI would. Naive Jetpack Compose scores a little higher than
+the others because its idioms (`.size(n.dp)` with parens, `start/end` insets) sidestep
+`target_size_lint` and `rtl_check` even when hand-rolled — an honest quirk the mean
+reflects rather than hides.
 
 ## `trigger_test.py` — activation coverage
 

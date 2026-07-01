@@ -1,7 +1,7 @@
 // BASELINE — "no-skill" reference generation for the eval harness.
 // Typical AI-emitted checkout WITHOUT the Mobile UI/UX Pro Max skill: hardcoded
 // hex colors, off-grid spacing, physical left/right padding, a sub-legible price,
-// an undersized quantity stepper, and no processing / error / offline states to
+// an undersized quantity stepper, and none of the required UI states to
 // prevent a double-charge. Graded against examples/checkout/react-native/.
 //
 // DO NOT copy this file. It exists only to measure the skill's lift.
