@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-07-01
+
 ### Added
 - **Settings flagship — real code in all four v1 frameworks** (Flutter, React Native,
   SwiftUI, Jetpack Compose): platform-correct grouped + searchable list (zero-results
@@ -66,6 +68,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Material 3 Expressive (May 2025), Apple HIG + iOS 26 Liquid Glass (June 2025),
   Android 16 window size classes, WCAG 2.2 (Oct 2023), DTCG 2025.10.
 
-[Unreleased]: https://github.com/noumanzindani/mobile-app-uiux-pro-max-skill/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/noumanzindani/mobile-app-uiux-pro-max-skill/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/noumanzindani/mobile-app-uiux-pro-max-skill/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/noumanzindani/mobile-app-uiux-pro-max-skill/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/noumanzindani/mobile-app-uiux-pro-max-skill/releases/tag/v0.1.0
