@@ -1,0 +1,77 @@
+/*
+ * login.css — the token + style layer for the Ionic login example.
+ *
+ * This is the ONLY file with raw values; the screen (LoginScreen.tsx) references
+ * `var(--...)` custom properties and these classes, never a literal #hex or px.
+ * Ionic themes through CSS variables, so the token discipline lives here in CSS
+ * rather than a typed constants file. Light + dark resolve via the .ion-palette-dark
+ * class palette (see README); every pair is checked with contrast_check.py.
+ */
+
+:root {
+  /* app spacing/radius — Ionic ships no scale (SPC-*/SHP-*), 4/8pt grid */
+  --app-space-xs: 4px;
+  --app-space-sm: 8px;
+  --app-space-md: 16px;
+  --app-space-lg: 24px;
+  --app-radius-md: 12px;
+  --app-radius-lg: 16px;
+  --app-target: 48px; /* min touch target — A11Y-* / BTN-* */
+}
+
+/* layout */
+.login-scroll {
+  display: flex;
+  flex-direction: column;
+  gap: var(--app-space-lg);
+  padding: var(--app-space-lg);
+}
+.login-header { display: flex; flex-direction: column; gap: var(--app-space-xs); }
+.login-title { margin: 0; color: var(--ion-text-color); }
+.login-subtitle { margin: 0; color: var(--ion-color-step-600); }
+.login-fields { display: flex; flex-direction: column; gap: var(--app-space-md); }
+.login-field { display: flex; flex-direction: column; gap: var(--app-space-xs); }
+.login-label { color: var(--ion-text-color); font-weight: 600; }
+
+/* inputs — Ionic components; keep tap area ≥ target */
+.login-input { --min-height: var(--app-target); --padding-start: var(--app-space-md); }
+
+/* offline banner — non-blocking (OFF-*/BDG-*) */
+.login-banner {
+  display: flex;
+  align-items: center;
+  gap: var(--app-space-sm);
+  padding: var(--app-space-sm) var(--app-space-md);
+  border-radius: var(--app-radius-md);
+  background: var(--ion-color-step-100);
+  color: var(--ion-text-color);
+}
+.login-banner .spacer { flex: 1; }
+
+/* inline error (STATE-*) */
+.login-error {
+  display: flex;
+  align-items: center;
+  gap: var(--app-space-sm);
+  color: var(--ion-color-danger);
+}
+
+/* sticky footer — primary action + SSO above the keyboard, clears the inset */
+.login-footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--app-space-sm);
+  padding: var(--app-space-md) var(--app-space-lg)
+           calc(var(--app-space-md) + var(--ion-safe-area-bottom)) var(--app-space-lg);
+  border-top: 1px solid var(--ion-color-step-150);
+  background: var(--ion-background-color);
+}
+.login-links { display: flex; justify-content: space-between; gap: var(--app-space-sm); }
+
+/* modal card body for success / permission-denied overlays */
+.login-card { display: flex; flex-direction: column; gap: var(--app-space-md); padding: var(--app-space-lg); }
+.login-card h2 { margin: 0; color: var(--ion-text-color); }
+.login-card p { margin: 0; color: var(--ion-color-step-600); }
+
+/* empty-state hint text */
+.login-hint { color: var(--ion-color-step-600); }

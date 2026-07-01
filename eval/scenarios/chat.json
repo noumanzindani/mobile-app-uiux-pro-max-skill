@@ -9,12 +9,14 @@
     "flutter": "examples/chat/flutter",
     "react-native": "examples/chat/react-native",
     "swiftui": "examples/chat/swiftui",
-    "jetpack-compose": "examples/chat/jetpack-compose"
+    "jetpack-compose": "examples/chat/jetpack-compose",
+    "ionic": "examples/chat/ionic"
   },
   "baseline": {
     "flutter": "eval/baselines/chat/flutter",
     "react-native": "eval/baselines/chat/react-native",
     "swiftui": "eval/baselines/chat/swiftui",
-    "jetpack-compose": "eval/baselines/chat/jetpack-compose"
+    "jetpack-compose": "eval/baselines/chat/jetpack-compose",
+    "ionic": "eval/baselines/chat/ionic"
   }
 }

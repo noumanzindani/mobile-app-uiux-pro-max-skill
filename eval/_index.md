@@ -36,8 +36,8 @@ inflates the headline — only adding baselines moves it.
 ### Scenarios & coverage
 
 Scenarios are declarative JSON in `eval/scenarios/*.json` (prompt · framework · required
-states · must-pass validators · with-skill and baseline paths). **All 20 cells** (5
-flagships × 4 frameworks) are paired — `test_full_baseline_coverage` fails CI if any
+states · must-pass validators · with-skill and baseline paths). **All 25 cells** (5
+flagships × 5 frameworks) are paired — `test_full_baseline_coverage` fails CI if any
 with-skill cell lacks a baseline, so a new scenario cannot silently ship unmeasured.
 `run_eval.py` still logs any uncovered cell rather than implying coverage. To add a new
 scenario, drop naive code under `eval/baselines/<scenario>/<framework>/` and reference it

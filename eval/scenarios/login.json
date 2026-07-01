@@ -9,12 +9,14 @@
     "flutter": "examples/login/flutter",
     "react-native": "examples/login/react-native",
     "swiftui": "examples/login/swiftui",
-    "jetpack-compose": "examples/login/jetpack-compose"
+    "jetpack-compose": "examples/login/jetpack-compose",
+    "ionic": "examples/login/ionic"
   },
   "baseline": {
     "flutter": "eval/baselines/login/flutter",
     "react-native": "eval/baselines/login/react-native",
     "swiftui": "eval/baselines/login/swiftui",
-    "jetpack-compose": "eval/baselines/login/jetpack-compose"
+    "jetpack-compose": "eval/baselines/login/jetpack-compose",
+    "ionic": "eval/baselines/login/ionic"
   }
 }

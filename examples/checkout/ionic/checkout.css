@@ -1,0 +1,239 @@
+/*
+ * checkout.css — the token + style layer for the Ionic checkout example.
+ *
+ * This is the ONLY file with raw values; the screen (CheckoutScreen.tsx) references
+ * `var(--...)` custom properties and these classes, never a literal #hex or px.
+ * Ionic themes through CSS variables, so the token discipline lives here in CSS
+ * rather than a typed constants file. Light + dark resolve via the .ion-palette-dark
+ * class palette (see README); every foreground/background pair is checked with
+ * contrast_check.py. Amounts use `tabular-nums` so the column stays aligned as totals
+ * recompute; the native-Pay brand fill is the one platform-mandated literal.
+ */
+
+:root {
+  /* app spacing/radius — Ionic ships no scale (SPC-*/SHP-*), 4/8pt grid */
+  --app-space-xs: 4px;
+  --app-space-sm: 8px;
+  --app-space-md: 16px;
+  --app-space-lg: 24px;
+  --app-space-xl: 32px;
+  --app-radius-md: 12px;
+  --app-radius-lg: 16px;
+  --app-radius-pill: 999px;
+  --app-target: 48px; /* min touch target — A11Y-* / BTN-* */
+
+  /* native Pay brand fill — the single platform-mandated literal (COL-*) */
+  --app-native-pay-bg: #000000;
+  --app-native-pay-fg: #ffffff;
+}
+
+/* layout */
+.checkout-scroll {
+  display: flex;
+  flex-direction: column;
+  gap: var(--app-space-lg);
+  padding: var(--app-space-lg);
+  padding-bottom: var(--app-space-xl);
+}
+.checkout-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--app-space-md);
+  padding: var(--app-space-lg);
+  border-radius: var(--app-radius-lg);
+  background: var(--ion-color-step-50);
+}
+.checkout-section-title { margin: 0; color: var(--ion-text-color); font-weight: 600; }
+
+/* screen-reader-only live region (announces total / processing / result) */
+.checkout-sr-only {
+  position: absolute;
+  width: var(--app-space-xs);
+  height: var(--app-space-xs);
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* order-summary line items */
+.checkout-item {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--app-space-md);
+}
+.checkout-item-info { display: flex; flex-direction: column; gap: var(--app-space-sm); flex: 1; }
+.checkout-item-title { margin: 0; color: var(--ion-text-color); }
+.checkout-item-meta { margin: 0; color: var(--ion-color-step-600); }
+.checkout-item-price {
+  margin: 0;
+  color: var(--ion-text-color);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* quantity stepper — every control is an IonButton ≥ target */
+.checkout-stepper { display: flex; flex-direction: row; align-items: center; gap: var(--app-space-sm); }
+.checkout-stepper-btn { --padding-start: 0; --padding-end: 0; min-width: var(--app-target); }
+.checkout-qty {
+  min-width: var(--app-space-lg);
+  text-align: center;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--ion-text-color);
+}
+
+/* divider + summary rows */
+.checkout-divider { border: none; border-top: 1px solid var(--ion-color-step-150); margin: 0; }
+.checkout-summary-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--app-space-md);
+}
+.checkout-summary-label { margin: 0; color: var(--ion-color-step-600); }
+.checkout-summary-value {
+  margin: 0;
+  color: var(--ion-text-color);
+  font-variant-numeric: tabular-nums;
+}
+.checkout-summary-value.is-positive { color: var(--ion-color-success); }
+
+/* total — emphasized, tabular, never colour-only */
+.checkout-total-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--app-space-md);
+  padding-top: var(--app-space-md);
+  border-top: 1px solid var(--ion-color-step-150);
+}
+.checkout-total-label { margin: 0; color: var(--ion-text-color); font-weight: 700; }
+.checkout-total-value {
+  margin: 0;
+  color: var(--ion-text-color);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* identity / guest checkout */
+.checkout-guest-hint { margin: 0; color: var(--ion-color-step-600); }
+
+/* native Pay — platform-styled, brand fill from the tokens above */
+.checkout-native-pay {
+  --background: var(--app-native-pay-bg);
+  --background-activated: var(--app-native-pay-bg);
+  --color: var(--app-native-pay-fg);
+  --border-radius: var(--app-radius-md);
+}
+.checkout-native-divider { text-align: center; color: var(--ion-color-step-600); margin: 0; }
+.checkout-note {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--app-space-sm);
+  padding: var(--app-space-md);
+  border-radius: var(--app-radius-md);
+  background: var(--ion-color-step-100);
+  color: var(--ion-text-color);
+}
+
+/* labeled, paste-friendly fields */
+.checkout-field { display: flex; flex-direction: column; gap: var(--app-space-xs); }
+.checkout-field-row { display: flex; flex-direction: row; gap: var(--app-space-md); }
+.checkout-field-col { flex: 1; }
+.checkout-label { color: var(--ion-color-step-600); font-weight: 600; }
+.checkout-input {
+  --min-height: var(--app-target);
+  --padding-start: var(--app-space-md);
+  --padding-end: var(--app-space-md);
+  --background: var(--ion-background-color);
+  --border-radius: var(--app-radius-md);
+  border: 1px solid var(--ion-color-step-150);
+  border-radius: var(--app-radius-md);
+}
+.checkout-input.is-invalid { border-color: var(--ion-color-danger); }
+.checkout-field-error {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--app-space-xs);
+  margin: 0;
+  color: var(--ion-color-danger);
+}
+
+/* payment-method options — selectable IonButtons */
+.checkout-method {
+  --border-radius: var(--app-radius-md);
+  --border-color: var(--ion-color-step-150);
+  --border-width: 1px;
+  --border-style: solid;
+}
+.checkout-method.is-selected {
+  --border-color: var(--ion-color-primary);
+  --border-width: 2px;
+}
+.checkout-method-info { display: flex; flex-direction: column; align-items: flex-start; gap: var(--app-space-xs); flex: 1; }
+.checkout-method-title { margin: 0; color: var(--ion-text-color); font-weight: 600; }
+.checkout-method-meta { margin: 0; color: var(--ion-color-step-600); }
+
+/* trust cue — paired with a lock icon + text, never colour alone */
+.checkout-trust { display: flex; flex-direction: row; align-items: center; gap: var(--app-space-sm); }
+.checkout-trust ion-icon { color: var(--ion-color-success); }
+.checkout-trust span { color: var(--ion-color-step-600); }
+
+/* offline banner — non-blocking (OFF-*/BDG-*) */
+.checkout-banner {
+  display: flex;
+  align-items: center;
+  gap: var(--app-space-sm);
+  padding: var(--app-space-sm) var(--app-space-md);
+  background: var(--ion-color-step-100);
+  color: var(--ion-text-color);
+}
+.checkout-banner .spacer { flex: 1; }
+
+/* decline banner (STATE-*/PAY-*) — recoverable, focus-receiving */
+.checkout-error {
+  display: flex;
+  align-items: center;
+  gap: var(--app-space-sm);
+  padding: var(--app-space-md);
+  border: 1px solid var(--ion-color-danger);
+  border-radius: var(--app-radius-md);
+  color: var(--ion-color-danger);
+}
+
+/* full-screen states — loading / empty / success */
+.checkout-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--app-space-md);
+  padding: var(--app-space-xl) var(--app-space-lg);
+  text-align: center;
+}
+.checkout-state-glyph { font-size: 2.5rem; color: var(--ion-color-step-500); }
+.checkout-state-glyph.is-success { color: var(--ion-color-success); }
+.checkout-state-title { margin: 0; color: var(--ion-text-color); }
+.checkout-state-body { margin: 0; color: var(--ion-color-step-600); max-width: 34ch; }
+
+/* success confirmation card */
+.checkout-confirm-actions { display: flex; flex-direction: column; gap: var(--app-space-sm); }
+
+/* sticky footer — the one primary Pay action, above the keyboard, clears the inset */
+.checkout-footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--app-space-sm);
+  padding: var(--app-space-md) var(--app-space-lg)
+           calc(var(--app-space-md) + var(--ion-safe-area-bottom)) var(--app-space-lg);
+  border-top: 1px solid var(--ion-color-step-150);
+  background: var(--ion-background-color);
+}
+.checkout-pay { --border-radius: var(--app-radius-md); font-variant-numeric: tabular-nums; }
+.checkout-pay-hint { margin: 0; text-align: center; color: var(--ion-color-step-600); }

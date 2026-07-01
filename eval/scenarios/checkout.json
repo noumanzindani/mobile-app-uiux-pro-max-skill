@@ -9,12 +9,14 @@
     "flutter": "examples/checkout/flutter",
     "react-native": "examples/checkout/react-native",
     "swiftui": "examples/checkout/swiftui",
-    "jetpack-compose": "examples/checkout/jetpack-compose"
+    "jetpack-compose": "examples/checkout/jetpack-compose",
+    "ionic": "examples/checkout/ionic"
   },
   "baseline": {
     "flutter": "eval/baselines/checkout/flutter",
     "react-native": "eval/baselines/checkout/react-native",
     "swiftui": "eval/baselines/checkout/swiftui",
-    "jetpack-compose": "eval/baselines/checkout/jetpack-compose"
+    "jetpack-compose": "eval/baselines/checkout/jetpack-compose",
+    "ionic": "eval/baselines/checkout/ionic"
   }
 }

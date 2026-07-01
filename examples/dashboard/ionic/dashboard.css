@@ -1,0 +1,321 @@
+/*
+ * dashboard.css — the token + style layer for the Ionic dashboard example.
+ *
+ * This is the ONLY file with raw values; the screen (DashboardScreen.tsx) references
+ * `var(--...)` custom properties and these classes, never a literal #hex or px. Ionic
+ * themes through CSS variables, so the token discipline lives here in CSS rather than a
+ * typed constants file. Light + dark resolve via the .ion-palette-dark class palette
+ * (see README); every foreground/background pair is checked with contrast_check.py.
+ *
+ * The responsive size-class reflow (1 col compact -> 2 col medium -> 3-4 col expanded)
+ * and the bottom-nav <-> side-rail swap are both driven from the breakpoint media
+ * queries here, so the scanned component holds no breakpoint literals.
+ */
+
+:root {
+  /* app spacing/radius — Ionic ships no scale (SPC-*/SHP-*), 4/8pt grid */
+  --app-space-xs: 4px;
+  --app-space-sm: 8px;
+  --app-space-md: 16px;
+  --app-space-lg: 24px;
+  --app-space-xl: 32px;
+  --app-radius-sm: 8px;
+  --app-radius-md: 12px;
+  --app-radius-lg: 16px;
+  --app-radius-pill: 999px;
+  --app-target: 48px;        /* min touch target — A11Y-* / BTN-* */
+  --app-rail: 88px;          /* side-rail width (medium + expanded) */
+  --app-max-content: 1120px; /* content max-measure — GRD-005 / SPC-018 */
+  --app-chart-h: 120px;      /* plot height (non-text decorative bars) */
+  --app-hairline: 1px;
+
+  /* breakpoint tokens — GRD-004 (compact < 600, medium 600–839, expanded >= 840) */
+  --app-bp-medium: 600px;
+  --app-bp-expanded: 840px;
+  --app-bp-wide: 1080px;
+
+  /* semantic chart series — distinguishable + paired with text/patterns (CHT-001) */
+  --dash-chart-1: var(--ion-color-primary);
+  --dash-chart-2: var(--ion-color-secondary, var(--ion-color-primary));
+  --dash-chart-3: var(--ion-color-tertiary, var(--ion-color-primary));
+  --dash-chart-4: var(--ion-color-success);
+}
+
+/* ---- shell -------------------------------------------------------------- */
+.dash-body {
+  display: flex;
+  flex-direction: row;
+  min-block-size: 100%;
+}
+.dash-main { flex: 1; min-inline-size: 0; }
+
+.dash-scroll {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--app-space-lg);
+  padding-block-end: calc(var(--app-space-xl) + var(--ion-safe-area-bottom));
+}
+.dash-content {
+  inline-size: 100%;
+  max-inline-size: var(--app-max-content);
+  display: flex;
+  flex-direction: column;
+  gap: var(--app-space-lg);
+}
+
+/* ---- global offline banner (non-blocking — STATE-008) ------------------- */
+.dash-banner {
+  display: flex;
+  align-items: center;
+  gap: var(--app-space-sm);
+  padding: var(--app-space-sm) var(--app-space-md);
+  background: var(--ion-color-step-100);
+  color: var(--ion-text-color);
+}
+.dash-banner .spacer { flex: 1; }
+
+/* ---- header ------------------------------------------------------------- */
+.dash-header {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--app-space-md);
+}
+.dash-header-titles { display: flex; flex-direction: column; gap: var(--app-space-xs); flex: 1; min-inline-size: 0; }
+.dash-greeting { margin: 0; color: var(--ion-text-color); }
+.dash-subtitle { margin: 0; color: var(--ion-color-step-600); }
+.dash-updated { margin: 0; color: var(--ion-color-step-600); font-size: 0.8rem; }
+.dash-header-actions { display: flex; flex-direction: row; align-items: center; gap: var(--app-space-sm); }
+
+/* ---- responsive card grid (GRD-001..004) — the whole point -------------- */
+.dash-grid {
+  display: grid;
+  grid-template-columns: 1fr;   /* compact: 1 column */
+  gap: var(--app-space-md);
+}
+.dash-cell--wide { grid-column: 1 / -1; }
+
+@media (min-width: 600px) {           /* medium: 2 columns */
+  .dash-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .dash-cell--wide { grid-column: span 2; }
+}
+@media (min-width: 840px) {           /* expanded: 3 columns, chart spans 2 */
+  .dash-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .dash-cell--wide { grid-column: span 2; }
+}
+@media (min-width: 1080px) {          /* wide expanded: 4 columns */
+  .dash-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .dash-cell--wide { grid-column: span 2; }
+}
+
+/* ---- card shell --------------------------------------------------------- */
+.dash-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--app-space-sm);
+  padding: var(--app-space-lg);
+  min-block-size: var(--app-target);
+  border: var(--app-hairline) solid var(--ion-color-step-150);
+  border-radius: var(--app-radius-lg);
+  background: var(--ion-color-step-50);
+  text-align: start;
+}
+/* a pressable card is a full IonButton retargeted to look like the card */
+.dash-card-btn {
+  margin: 0;
+  --background: var(--ion-color-step-50);
+  --background-hover: var(--ion-color-step-100);
+  --background-activated: var(--ion-color-step-100);
+  --color: var(--ion-text-color);
+  --border-radius: var(--app-radius-lg);
+  --box-shadow: none;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  text-transform: none;
+  block-size: auto;
+}
+.dash-card-btn::part(native) {
+  border: var(--app-hairline) solid var(--ion-color-step-150);
+  border-radius: var(--app-radius-lg);
+  padding: var(--app-space-lg);
+  block-size: auto;
+  min-block-size: var(--app-target);
+}
+.dash-card-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--app-space-sm);
+  inline-size: 100%;
+  text-align: start;
+}
+
+.dash-label { margin: 0; color: var(--ion-color-step-600); font-size: 0.85rem; }
+.dash-value { margin: 0; color: var(--ion-text-color); font-size: 1.9rem; font-weight: 700; line-height: 1.15; }
+.dash-tnum { font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; }
+
+/* trend — icon + sign + text, never color-only (A11Y-012 / COL-003) */
+.dash-trend { display: flex; flex-direction: row; align-items: center; gap: var(--app-space-xs); margin: 0; font-size: 0.85rem; }
+.dash-trend--up { color: var(--ion-color-success); }
+.dash-trend--down { color: var(--ion-color-danger); }
+.dash-trend--flat { color: var(--ion-color-step-600); }
+
+/* stale / offline within a tile (STATE-011) */
+.dash-stale { display: flex; flex-direction: row; align-items: center; gap: var(--app-space-xs); margin: 0; color: var(--ion-color-step-600); font-size: 0.8rem; }
+.dash-chip { color: var(--ion-color-step-600); font-size: 0.75rem; }
+
+/* scoped inline error (STATE-007 / STATE-014) */
+.dash-error { display: flex; flex-direction: row; align-items: flex-start; gap: var(--app-space-xs); margin: 0; color: var(--ion-color-danger); font-size: 0.9rem; }
+.dash-empty { margin: 0; color: var(--ion-color-step-600); font-size: 0.95rem; }
+.dash-perm-fallback { margin: 0; color: var(--ion-color-step-600); font-size: 0.8rem; }
+
+/* skeletons — shape-matched, non-text blocks (STATE-005) */
+.dash-skel { display: flex; flex-direction: column; gap: var(--app-space-sm); }
+.dash-skel-block { border-radius: var(--app-radius-sm); background: var(--ion-color-step-150); }
+.dash-skel-label { block-size: 0.75rem; inline-size: 40%; }
+.dash-skel-number { block-size: 1.9rem; inline-size: 70%; }
+.dash-skel-trend { block-size: 0.75rem; inline-size: 55%; }
+.dash-skel-pulse { animation: dash-pulse 1.4s ease-in-out infinite; }
+@keyframes dash-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.45; } }
+@media (prefers-reduced-motion: reduce) {
+  .dash-skel-pulse { animation: none; }
+  .dash-bar-fill, .dash-value { transition: none; }
+}
+
+/* actions inside a tile — all IonButton, spaced from the card body (>=8dp) */
+.dash-tile-action { align-self: flex-start; margin-top: var(--app-space-xs); }
+
+/* ---- chart -------------------------------------------------------------- */
+.dash-section-title { margin: 0; color: var(--ion-text-color); font-weight: 600; }
+.dash-chart-head { display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: var(--app-space-sm); }
+.dash-plot {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--app-space-xs);
+  block-size: var(--app-chart-h);
+}
+.dash-bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: var(--app-space-xs); block-size: 100%; justify-content: flex-end; }
+.dash-bar-track { inline-size: 100%; flex: 1; display: flex; align-items: flex-end; }
+.dash-bar-fill {
+  inline-size: 100%;
+  block-size: calc(var(--dash-bar) * 1%);
+  min-block-size: var(--app-hairline);
+  border-radius: var(--app-radius-sm) var(--app-radius-sm) 0 0;
+  background: var(--dash-bar-color);
+  transition: block-size 320ms ease-out;
+}
+/* non-color redundancy: alternating pattern so bars differ without hue alone */
+.dash-bar-col:nth-child(even) .dash-bar-fill { background-image: repeating-linear-gradient(45deg, transparent, transparent 3px, var(--ion-color-step-050) 3px, var(--ion-color-step-050) 6px); }
+.dash-bar-cap { color: var(--ion-color-step-600); font-size: 0.7rem; }
+
+.dash-skel-plot { display: flex; flex-direction: row; align-items: flex-end; justify-content: space-between; gap: var(--app-space-xs); block-size: var(--app-chart-h); }
+.dash-skel-bar { flex: 1; border-radius: var(--app-radius-sm); background: var(--ion-color-step-150); }
+.dash-skel-bar:nth-child(1) { block-size: 55%; }
+.dash-skel-bar:nth-child(2) { block-size: 80%; }
+.dash-skel-bar:nth-child(3) { block-size: 45%; }
+.dash-skel-bar:nth-child(4) { block-size: 95%; }
+.dash-skel-bar:nth-child(5) { block-size: 70%; }
+.dash-skel-bar:nth-child(6) { block-size: 40%; }
+.dash-skel-bar:nth-child(7) { block-size: 62%; }
+
+/* chart data-table fallback — the real content for screen readers (CHT-002) */
+.dash-table { display: flex; flex-direction: column; gap: var(--app-space-xs); margin-top: var(--app-space-sm); }
+.dash-table-title { margin: 0; color: var(--ion-color-step-600); font-size: 0.8rem; }
+.dash-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--app-space-md);
+  padding-block: var(--app-space-xs);
+  border-top: var(--app-hairline) solid var(--ion-color-step-150);
+}
+.dash-row-day { margin: 0; color: var(--ion-color-step-600); }
+.dash-row-value { margin: 0; color: var(--ion-text-color); }
+
+/* ---- activity list ------------------------------------------------------ */
+.dash-activity { display: flex; flex-direction: column; gap: var(--app-space-xs); }
+.dash-activity-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--app-space-sm);
+  padding-block: var(--app-space-sm);
+  border-top: var(--app-hairline) solid var(--ion-color-step-150);
+}
+.dash-activity-glyph { color: var(--ion-color-primary); }
+.dash-activity-text { margin: 0; flex: 1; color: var(--ion-text-color); }
+.dash-activity-time { margin: 0; color: var(--ion-color-step-600); font-size: 0.8rem; }
+.dash-skel-row { display: flex; flex-direction: row; align-items: center; gap: var(--app-space-sm); padding-block: var(--app-space-sm); }
+.dash-skel-dot { inline-size: var(--app-space-lg); block-size: var(--app-space-lg); border-radius: var(--app-radius-pill); background: var(--ion-color-step-150); }
+.dash-skel-line { flex: 1; block-size: 0.9rem; border-radius: var(--app-radius-sm); background: var(--ion-color-step-150); }
+
+/* ---- navigation: bottom nav (compact) <-> side rail (medium+) ----------- */
+.dash-bottomnav {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-around;
+  border-top: var(--app-hairline) solid var(--ion-color-step-150);
+  background: var(--ion-background-color);
+  padding-block-end: var(--ion-safe-area-bottom);
+}
+.dash-rail { display: none; }
+
+@media (min-width: 600px) {
+  .dash-bottomnav { display: none; }
+  .dash-rail {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--app-space-sm);
+    inline-size: var(--app-rail);
+    padding: var(--app-space-lg) var(--app-space-sm);
+    border-inline-end: var(--app-hairline) solid var(--ion-color-step-150);
+    background: var(--ion-background-color);
+  }
+}
+
+.dash-nav-btn {
+  --color: var(--ion-color-step-600);
+  --color-hover: var(--ion-text-color);
+  --background-hover: var(--ion-color-step-100);
+  --padding-top: var(--app-space-sm);
+  --padding-bottom: var(--app-space-sm);
+  min-block-size: var(--app-target);
+  flex: 1;
+  text-transform: none;
+  margin: 0;
+}
+.dash-nav-btn.dash-nav-active { --color: var(--ion-color-primary); }
+.dash-nav-inner { display: flex; flex-direction: column; align-items: center; gap: var(--app-space-xs); }
+.dash-nav-label { font-size: 0.7rem; }
+
+/* range/refresh pills in the header */
+.dash-range-btn, .dash-refresh-btn {
+  --border-radius: var(--app-radius-pill);
+  --border-color: var(--ion-color-step-150);
+  --color: var(--ion-text-color);
+  min-block-size: var(--app-target);
+  text-transform: none;
+  margin: 0;
+}
+
+/* visually-hidden live region — announces refresh/update to assistive tech */
+.dash-sr-only {
+  position: absolute;
+  inline-size: var(--app-hairline);
+  block-size: var(--app-hairline);
+  padding: 0;
+  margin: calc(-1 * var(--app-hairline));
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}

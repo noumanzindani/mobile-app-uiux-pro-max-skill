@@ -1,0 +1,138 @@
+/*
+ * settings.css — the token + style layer for the Ionic settings example.
+ *
+ * This is the ONLY file with raw values; the screen (SettingsScreen.tsx) references
+ * `var(--...)` custom properties and these classes, never a literal #hex or px.
+ * Ionic themes through CSS variables, so the token discipline lives here in CSS
+ * rather than a typed constants file. Light + dark resolve via the .ion-palette-dark
+ * class palette (see README); every pair is checked with contrast_check.py.
+ */
+
+:root {
+  /* app spacing/radius — Ionic ships no scale (SPC-*/SHP-*), 4/8pt grid */
+  --app-space-xs: 4px;
+  --app-space-sm: 8px;
+  --app-space-md: 16px;
+  --app-space-lg: 24px;
+  --app-space-xl: 32px;
+  --app-radius-sm: 8px;
+  --app-radius-md: 12px;
+  --app-radius-lg: 16px;
+  --app-target: 48px; /* min touch target — A11Y-* / BTN-* */
+  --app-pane: 320px;  /* leading pane width in the two-pane layout */
+}
+
+/* content padding — clears the home indicator via the safe-area inset */
+.settings-content {
+  --padding-top: var(--app-space-sm);
+  --padding-bottom: calc(var(--app-space-xl) + var(--ion-safe-area-bottom));
+}
+
+/* search — full-width, tap area >= target */
+.settings-search {
+  --border-radius: var(--app-radius-md);
+  padding-inline: var(--app-space-md);
+  padding-top: var(--app-space-sm);
+}
+
+/* offline banner — non-blocking (OFF-*/BDG-*) */
+.settings-banner {
+  display: flex;
+  align-items: center;
+  gap: var(--app-space-sm);
+  margin: var(--app-space-sm) var(--app-space-md) 0;
+  padding: var(--app-space-sm) var(--app-space-md);
+  border-radius: var(--app-radius-md);
+  background: var(--ion-color-step-100);
+  color: var(--ion-text-color);
+}
+.settings-banner .settings-banner-text { flex: 1; }
+
+/* grouped list — concentric inset card on iOS, flat list on md (Ionic `mode`) */
+.settings-group {
+  margin-inline: var(--app-space-md);
+  margin-top: var(--app-space-lg);
+  border-radius: var(--app-radius-md);
+  overflow: hidden;
+}
+.settings-group-header {
+  color: var(--ion-color-step-600);
+  padding-inline-start: var(--app-space-md);
+}
+
+/* rows */
+.settings-item {
+  --min-height: var(--app-target);
+  --padding-start: var(--app-space-md);
+  --inner-padding-end: var(--app-space-md);
+}
+.settings-note { color: var(--ion-color-step-600); }
+.settings-value { color: var(--ion-color-step-600); }
+.settings-meta { color: var(--ion-color-step-600); }
+
+/* inline per-row status (error revert / saved confirm) */
+.settings-inline {
+  display: flex;
+  align-items: center;
+  gap: var(--app-space-xs);
+  margin-top: var(--app-space-xs);
+}
+.settings-inline-error { color: var(--ion-color-danger); }
+.settings-inline-success { color: var(--ion-color-success); }
+
+/* synced-value skeleton stands in for the toggle while it loads */
+.settings-skeleton {
+  width: var(--app-space-xl);
+  border-radius: var(--app-radius-lg);
+}
+
+/* destructive zone — isolated at the very bottom, out of the accidental-tap arc */
+.settings-danger {
+  margin-inline: var(--app-space-md);
+  margin-top: var(--app-space-xl);
+  border-radius: var(--app-radius-md);
+  overflow: hidden;
+}
+.settings-danger-label { color: var(--ion-color-danger); font-weight: 600; }
+.settings-danger-hint {
+  display: block;
+  color: var(--ion-color-step-600);
+  padding: var(--app-space-sm) var(--app-space-md) 0;
+}
+
+/* zero-results empty state (a search flavour of empty; the list is never empty) */
+.settings-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--app-space-sm);
+  padding: var(--app-space-xl) var(--app-space-lg);
+  text-align: center;
+}
+.settings-empty-glyph { color: var(--ion-color-step-500); }
+.settings-empty-title { margin: 0; color: var(--ion-text-color); }
+.settings-empty-body { margin: 0; color: var(--ion-color-step-600); }
+
+/* search results caption */
+.settings-result-caption {
+  color: var(--ion-color-step-600);
+  padding-inline-start: var(--app-space-md);
+}
+
+/* responsive: single list (compact) -> two-pane at >= 840dp (GRD-003) */
+.settings-two-pane { display: block; }
+@media (min-width: 840px) {
+  .settings-two-pane {
+    display: grid;
+    grid-template-columns: var(--app-pane) 1fr;
+    gap: var(--app-space-lg);
+    align-items: start;
+  }
+  .settings-pane-detail { border-inline-start: 1px solid var(--ion-color-step-150); }
+}
+
+/* nav row selected state (two-pane leading) */
+.settings-nav-active { --background: var(--ion-color-step-100); }
+
+/* sub-page modal body */
+.settings-subpage { --padding-top: var(--app-space-sm); }

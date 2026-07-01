@@ -9,12 +9,14 @@
     "flutter": "examples/dashboard/flutter",
     "react-native": "examples/dashboard/react-native",
     "swiftui": "examples/dashboard/swiftui",
-    "jetpack-compose": "examples/dashboard/jetpack-compose"
+    "jetpack-compose": "examples/dashboard/jetpack-compose",
+    "ionic": "examples/dashboard/ionic"
   },
   "baseline": {
     "flutter": "eval/baselines/dashboard/flutter",
     "react-native": "eval/baselines/dashboard/react-native",
     "swiftui": "eval/baselines/dashboard/swiftui",
-    "jetpack-compose": "eval/baselines/dashboard/jetpack-compose"
+    "jetpack-compose": "eval/baselines/dashboard/jetpack-compose",
+    "ionic": "eval/baselines/dashboard/ionic"
   }
 }

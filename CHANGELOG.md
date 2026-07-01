@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Ionic flagship examples + eval parity — Ionic is now measured, not just documented.**
+  Real Ionic 8 (@ionic/react + Capacitor) implementations of all five flagships (login,
+  checkout, chat, dashboard, settings), each **100/100** on `run_all.py`, plus a committed
+  naive Ionic baseline per flagship. Token discipline lives in a `.css` custom-property
+  layer (the screen `.tsx` references `var(--…)`/classes only), giving a value-free
+  scanned file. The eval matrix grows **20 → 25 cells** (5 flagships × 5 frameworks); mean
+  lift **+77.6 pts** (100.0 vs 22.4), full-coverage gate still holds.
 - **Ionic framework pack (`frameworks/ionic/`) — the 5th supported framework.** Maps
   the semantic design system to idiomatic Ionic 8 + Capacitor: **CSS-variable tokens**
   (`--ion-color-*` full 5-var sets, stepped neutrals, app spacing/radius custom
@@ -25,7 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   baseline = intentionally-naive "no-skill" code in `eval/baselines/`) are graded by
   the exact validators that ship, with no model call or API key. `run_eval.py` reports
   the readiness **lift** and gates CI on *every with-skill cell scoring 100 AND mean
-  lift ≥ 40 pts* (current: **+74.4 pts** across **all 20 cells** — 5 flagships × 4
+  lift ≥ 40 pts* (current: **+77.6 pts** across **all 25 cells** — 5 flagships × 5
   frameworks — each with a committed naive baseline; `test_full_baseline_coverage` fails
   if any cell is unpaired). `trigger_test.py` guards activation (Goal G2): the
   `SKILL.md` description must carry every flagship trigger keyword and clear

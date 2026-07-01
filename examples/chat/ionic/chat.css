@@ -1,0 +1,255 @@
+/*
+ * chat.css — the token + style layer for the Ionic chat example.
+ *
+ * This is the ONLY file with raw values; the screen (ChatScreen.tsx) references
+ * `var(--...)` custom properties and these classes, never a literal #hex or px.
+ * Ionic themes through CSS variables, so the token discipline lives here in CSS
+ * rather than a typed constants file. Light + dark resolve via the
+ * .ion-palette-dark class palette (see README); own- and other-bubble text each
+ * clear WCAG 4.5:1 on their fill in both themes (verify with contrast_check.py).
+ */
+
+:root {
+  /* app spacing/radius — Ionic ships no scale (SPC-*/SHP-*), 4/8pt grid */
+  --app-space-xs: 4px;
+  --app-space-sm: 8px;
+  --app-space-md: 16px;
+  --app-space-lg: 24px;
+  --app-space-xl: 32px;
+  --app-radius-sm: 8px;
+  --app-radius-md: 12px;
+  --app-radius-lg: 20px;
+  --app-radius-pill: 999px;
+  --app-target: 48px; /* min touch target — A11Y-* / BTN-* */
+
+  /* chat bubble roles — derived from Ionic's palette so both themes track it */
+  --app-chat-self-bg: var(--ion-color-primary);
+  --app-chat-self-fg: var(--ion-color-primary-contrast);
+  --app-chat-self-meta: var(--ion-color-primary-contrast);
+  --app-chat-other-bg: var(--ion-color-step-100);
+  --app-chat-other-fg: var(--ion-text-color);
+  --app-chat-other-meta: var(--ion-color-step-600);
+  --app-status-failed: var(--ion-color-danger);
+}
+
+/* Screen-reader-only live region (visually hidden, still announced). */
+.chat-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Header identity — avatar + name + presence */
+.chat-identity {
+  display: flex;
+  align-items: center;
+  gap: var(--app-space-sm);
+  min-width: 0;
+  padding-inline: var(--app-space-xs);
+}
+.chat-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--app-target);
+  height: var(--app-target);
+  border-radius: var(--app-radius-pill);
+  background: var(--ion-color-step-150);
+  color: var(--ion-text-color);
+  font-weight: 600;
+}
+.chat-identity-text { display: flex; flex-direction: column; min-width: 0; }
+.chat-peer-name {
+  font-weight: 600;
+  color: var(--ion-text-color);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.chat-presence {
+  font-size: 0.8125rem;
+  color: var(--ion-color-step-600);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Directional glyphs (back chevron, send arrow) mirror in RTL. */
+:host-context([dir="rtl"]) .chat-mirror,
+[dir="rtl"] .chat-mirror { transform: scaleX(-1); }
+
+/* Banners — non-blocking (OFF-*/STATE-*) */
+.chat-banner {
+  display: flex;
+  align-items: center;
+  gap: var(--app-space-sm);
+  padding: var(--app-space-sm) var(--app-space-md);
+  background: var(--ion-color-step-100);
+  color: var(--ion-text-color);
+}
+.chat-banner-text { flex: 1; font-size: 0.875rem; }
+.chat-banner-error { color: var(--ion-color-danger); }
+
+/* List area + inverted message list */
+.chat-list-area { position: relative; display: flex; flex-direction: column; height: 100%; }
+.chat-list {
+  display: flex;
+  flex-direction: column-reverse; /* newest at the bottom, mirrors an inverted list */
+  gap: var(--app-space-sm);
+  padding: var(--app-space-md) var(--app-space-lg);
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* Rows + bubbles — own/other align to opposite sides, mirror in RTL via flex. */
+.chat-row { display: flex; width: 100%; }
+.chat-row-me { justify-content: flex-end; }
+.chat-row-them { justify-content: flex-start; }
+.chat-bubble {
+  display: flex;
+  flex-direction: column;
+  gap: var(--app-space-xs);
+  max-width: 82%;
+  padding: var(--app-space-sm) var(--app-space-md);
+  border-radius: var(--app-radius-lg);
+}
+.chat-bubble-me {
+  background: var(--app-chat-self-bg);
+  color: var(--app-chat-self-fg);
+  border-start-end-radius: var(--app-radius-sm);
+}
+.chat-bubble-them {
+  background: var(--app-chat-other-bg);
+  color: var(--app-chat-other-fg);
+  border-start-start-radius: var(--app-radius-sm);
+}
+.chat-bubble-failed { outline: 1px solid var(--app-status-failed); }
+.chat-text { margin: 0; }
+.chat-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--app-space-sm);
+  flex-wrap: wrap;
+  font-size: 0.8125rem;
+}
+.chat-row-me .chat-time { color: var(--app-chat-self-meta); }
+.chat-row-them .chat-time { color: var(--app-chat-other-meta); }
+.chat-status { display: inline-flex; align-items: center; gap: var(--app-space-xs); }
+.chat-row-me .chat-status { color: var(--app-chat-self-meta); }
+.chat-status-failed { color: var(--app-status-failed); }
+.chat-status-read ion-icon { color: var(--app-chat-self-meta); }
+.chat-status-text { font-size: 0.8125rem; }
+.chat-retry-btn { align-self: flex-start; --color: var(--app-status-failed); }
+
+/* Typing indicator — dots animate; paused under reduce-motion (A11Y-011) */
+.chat-typing { flex-direction: row; align-items: center; gap: var(--app-space-xs); }
+.chat-typing-dot {
+  width: var(--app-space-sm);
+  height: var(--app-space-sm);
+  border-radius: var(--app-radius-pill);
+  background: var(--ion-color-step-600);
+  animation: chat-typing 1s infinite ease-in-out;
+}
+.chat-typing-dot:nth-child(2) { animation-delay: 0.15s; }
+.chat-typing-dot:nth-child(3) { animation-delay: 0.3s; }
+@keyframes chat-typing {
+  0%, 100% { opacity: 0.3; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(calc(var(--app-space-xs) * -1)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chat-typing-dot { animation: none; opacity: 0.6; }
+}
+
+/* Empty state — a designed first-run prompt, not a blank list */
+.chat-empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--app-space-sm);
+  padding: var(--app-space-xl);
+  text-align: center;
+}
+.chat-empty-glyph { font-size: 2rem; }
+.chat-empty-title { margin: 0; font-weight: 600; color: var(--ion-text-color); }
+.chat-empty-body { margin: 0; color: var(--ion-color-step-600); }
+
+/* Loading skeleton — matches the loaded bubble layout */
+.chat-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: var(--app-space-md);
+  padding: var(--app-space-md) var(--app-space-lg);
+}
+.chat-skeleton-bubble { min-width: 40%; }
+.chat-skeleton-short { width: 60%; }
+
+/* Jump-to-latest dock + new-messages pill (CHAT-005) */
+.chat-jump-dock {
+  position: absolute;
+  inset-inline-end: var(--app-space-lg);
+  inset-block-end: var(--app-space-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--app-space-sm);
+}
+.chat-new-pill { --border-radius: var(--app-radius-pill); }
+.chat-jump {
+  --border-radius: var(--app-radius-pill);
+  --padding-start: 0;
+  --padding-end: 0;
+  width: var(--app-target);
+  height: var(--app-target);
+}
+
+/* Composer — attach · growing field · send. Clears the home-indicator inset. */
+.chat-composer {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--app-space-sm);
+  padding: var(--app-space-sm) var(--app-space-md);
+  padding-bottom: calc(var(--app-space-sm) + var(--ion-safe-area-bottom));
+  border-top: 1px solid var(--ion-color-step-150);
+  background: var(--ion-background-color);
+}
+.chat-icon-btn {
+  --padding-start: 0;
+  --padding-end: 0;
+  min-width: var(--app-target);
+  min-height: var(--app-target);
+  --color: var(--ion-color-primary);
+}
+.chat-input {
+  flex: 1;
+  --background: var(--ion-color-step-100);
+  --border-radius: var(--app-radius-lg);
+  --padding-start: var(--app-space-md);
+  --padding-end: var(--app-space-md);
+  --padding-top: var(--app-space-sm);
+  --padding-bottom: var(--app-space-sm);
+  min-height: var(--app-target);
+  max-height: 120px; /* grow, then scroll internally (FRM-003) */
+}
+.chat-send-btn {
+  --border-radius: var(--app-radius-pill);
+  --padding-start: 0;
+  --padding-end: 0;
+  min-width: var(--app-target);
+  min-height: var(--app-target);
+}
+
+/* Modal card body for the permission-denied overlay */
+.chat-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--app-space-md);
+  padding: var(--app-space-lg);
+}
+.chat-card-note { display: flex; align-items: flex-start; gap: var(--app-space-sm); }
