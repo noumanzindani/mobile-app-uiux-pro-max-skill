@@ -20,8 +20,17 @@ IGNORE = re.compile(r"ux:ignore")
 COMMENT = re.compile(r"^\s*(//|#|/\*|\*)")
 # spacing-ish properties followed by a raw number
 SPACING_RE = re.compile(
-    r"(padding|margin|gap|spacing|EdgeInsets\.(all|symmetric|only)|SizedBox|"
-    r"\bheight|\bwidth)\b[^;\n]*?(?<![\w.])(\d{1,4})(?:\.0)?\b",
+    r"(?:"
+    # Clear styling keywords: flag the first standalone number that follows.
+    r"(?:padding|margin|gap|spacing|SizedBox|"
+    r"EdgeInsets(?:Directional)?\.(?:all|symmetric|only|fromLTRB|fromSTEB))"
+    r"[^;\n]*?(?<![\w.])(\d{1,4})(?:\.0)?\b"
+    r"|"
+    # width/height are also ordinary identifiers (e.g. a `double width` param or a
+    # `width >= 600` comparison), so only flag them when assigned a numeric literal.
+    r"\b(?:width|height|minWidth|minHeight|maxWidth|maxHeight)\s*[:=]\s*\{?\s*"
+    r"(?<![\w.])(\d{1,4})(?:\.0)?\b"
+    r")",
     re.IGNORECASE,
 )
 NAMED_COLOR = re.compile(r"\bColor\(0x[0-9a-fA-F]{8}\)")  # Flutter ARGB literal
@@ -46,11 +55,11 @@ def check(paths=None):
                     f"Hardcoded ARGB color '{m.group(0)}' — use a token.",
                 ))
             for m in SPACING_RE.finditer(line):
-                val = int(m.group(3))
+                val = int(m.group(1) or m.group(2))
                 if val not in (0, 1) and val % 4 != 0 and val < 1000:
                     findings.append(Finding(
                         "token_lint", "SPC-TOK", WARNING, str(path), ln,
-                        f"Off-grid value {val} for '{m.group(1)}' — snap to the 4/8pt grid "
+                        f"Off-grid spacing value {val} — snap to the 4/8pt grid "
                         f"or use a spacing token.",
                     ))
     return findings

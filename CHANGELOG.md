@@ -33,6 +33,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   contrast ≥4.5:1 both themes, icon+text status not color-only). Each scores
   **100/100** on `run_all.py`. SwiftUI guards iOS-only modifiers for cross-SDK compile.
 
+### Fixed
+- `token_lint` no longer false-flags bare `width`/`height` identifiers (e.g. a
+  `double width` parameter or a `width >= 600` comparison) as off-grid spacing — the
+  ambiguous keywords now require a numeric assignment (`width: 30`, `width={30}`), while
+  clear styling keywords (padding/margin/gap/`EdgeInsets`) stay loose. Added a regression
+  fixture + test; verified no change to the 20 flagship implementations (still 100/100).
+
 ## [0.2.0] - 2026-07-01
 
 ### Added

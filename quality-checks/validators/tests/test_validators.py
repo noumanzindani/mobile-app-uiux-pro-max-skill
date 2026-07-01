@@ -43,6 +43,12 @@ def test_token_lint_flags_bad():
 def test_token_lint_clean_on_good():
     assert token_lint.check([GOOD]) == []
 
+def test_token_lint_ignores_bare_width_identifiers():
+    # `double width` params, `width >= 600` comparisons, and return values are not
+    # off-grid spacing — the linter must not flag them (regression guard).
+    edge = str(FIXTURES / "spacing_edge.dart")
+    assert token_lint.check([edge]) == []
+
 
 # --- target_size_lint --------------------------------------------------------
 def test_target_size_flags_bad():
