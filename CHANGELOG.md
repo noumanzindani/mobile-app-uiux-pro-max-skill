@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Settings flagship — real code in all four v1 frameworks** (Flutter, React Native,
+  SwiftUI, Jetpack Compose): platform-correct grouped + searchable list (zero-results
+  empty), switches exposing a11y state, **isolated destructive zone** with multi-step
+  account deletion (store policy), failed toggles that revert (no silent false success),
+  light/dark/system theme switch, and responsive single-list → two-pane at ≥840dp. Each
+  scores **100/100** on `run_all.py`. Completes the five-flagship set (login, chat,
+  checkout, dashboard, settings) — 20 implementations across 4 frameworks.
 - **Dashboard flagship — real code in all four v1 frameworks** (Flutter, React Native,
   SwiftUI, Jetpack Compose): responsive size-class reflow (1 → 2 → 3–4 columns across
   compact/medium/expanded + capped max measure), **per-widget independent states** (each
