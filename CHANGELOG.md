@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Dashboard flagship — real code in all four v1 frameworks** (Flutter, React Native,
+  SwiftUI, Jetpack Compose): responsive size-class reflow (1 → 2 → 3–4 columns across
+  compact/medium/expanded + capped max measure), **per-widget independent states** (each
+  tile loads/errors/empties on its own — no global spinner), a bar chart with
+  non-color-only encoding + a screen-reader **data-table fallback**, tabular numerals,
+  and cached+stale offline tiles. Each scores **100/100** on `run_all.py`.
 - **Checkout flagship — real code in all four v1 frameworks** (Flutter, React Native,
   SwiftUI, Jetpack Compose): cart → address → pay → editable review → confirm, native
   Apple/Google Pay, guest checkout, always-visible honest itemized totals (tabular
