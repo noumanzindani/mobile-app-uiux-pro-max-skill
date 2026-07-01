@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **Chat flagship — real code in all four v1 frameworks** (Flutter, React Native,
+  SwiftUI, Jetpack Compose): optimistic send lifecycle (sending→sent→delivered→read,
+  failed + tap-to-retry, offline queue + auto-flush), inverted virtualized list,
+  keyboard + safe-area handling, typing indicator, all 7 states, WCAG 2.2 (bubble
+  contrast ≥4.5:1 both themes, icon+text status not color-only). Each scores
+  **100/100** on `run_all.py`. SwiftUI guards iOS-only modifiers for cross-SDK compile.
+
 ## [0.2.0] - 2026-07-01
 
 ### Added
