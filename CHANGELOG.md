@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Ionic framework pack (`frameworks/ionic/`) — the 5th supported framework.** Maps
+  the semantic design system to idiomatic Ionic 8 + Capacitor: **CSS-variable tokens**
+  (`--ion-color-*` full 5-var sets, stepped neutrals, app spacing/radius custom
+  properties) with class-based dark **palettes**; the built-in **`mode="ios|md"`**
+  adaptive engine (auto-detected, override-able) as the native-feel path *without*
+  `Platform.select`; components (`ion-button`/`ion-list`/`ion-modal` breakpoint sheets/
+  `ion-tabs`/`ion-split-pane`) wired to targets, ARIA, and safe area
+  (`viewport-fit=cover` + `--ion-safe-area-*`); all 7 states with Ionic idioms
+  (`ion-skeleton-text`, `@capacitor/network` offline, `ion-toast`, Capacitor
+  permissions); and `snippets/{button,list,sheet,safe-area,theme}`. Added to the
+  `SKILL.md` framework router. Notes the removed `ion-virtual-scroll` (virtualize with a
+  framework library) and the "test both modes" pitfall. References existing rule IDs —
+  no registry change.
 - **Eval harness (`eval/`) — the skill's quality claim is now a reproducible,
   CI-gated number.** Two committed corpora (with-skill = the flagship `examples/`,
   baseline = intentionally-naive "no-skill" code in `eval/baselines/`) are graded by

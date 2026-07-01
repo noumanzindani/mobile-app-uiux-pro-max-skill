@@ -63,7 +63,7 @@ framework / paradigm choice, then generate, then self-audit):
 | If the task is about… | Read |
 |---|---|
 | choosing the platform paradigm | `rules/system/platform-conventions.md` |
-| a specific framework | `frameworks/<flutter\|react-native\|swiftui\|jetpack-compose>/_index.md` |
+| a specific framework | `frameworks/<flutter\|react-native\|swiftui\|jetpack-compose\|ionic>/_index.md` |
 | an industry app | `industries/<finance-banking\|healthcare\|ecommerce-marketplace\|social-messaging\|productivity>/_index.md` |
 | spacing / type / color / elevation / shape / icon / grid / density | `rules/foundations/<topic>.md` |
 | a component (button, list, nav, form, sheet, dialog, search, table, chart…) | `rules/components/<component>.md` |
